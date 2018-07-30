@@ -1,1 +1,51 @@
+public class Item extends Receipt
+{
+    private String myName;
+    private double myCost;
+    private String myExpiration;
+    private String mySerialNumber;
+
+    public Item() {
+        myName = "";
+        myCost = 0.0;
+        myExpiration = "";
+        mySerialNumber = "";
+    }
+
+    public Item(String name, double cost, String expiration, String serialNumber) {
+        myName = name;
+        myCost = cost;
+        myExpiration = expiration;
+        mySerialNumber = serialNumber;
+    }
+
+    public String printItem() {
+        String ans = "Item Name: " + myName;
+        ans += "; Item Cost: " + myCost;
+        ans += "; Item Expriation: " + myExpiration;
+        ans += "; Item Serial Number: " + mySerialNumber;
+
+        return ans;
+    }
+
+    public void setCost(double newCost) {
+        myCost = newCost;
+    }
+
+    public void setExpiration(String newExpiration) {
+        myExpiration = newExpiration;
+    }
+
+    public double getCost() {
+        return myCost;
+    }
+
+    public String getExpiration() {
+        return myExpiration;
+    }
+
+    public String getSerialNumber() {
+        return mySerialNumber;
+    }
+}
 
