@@ -1,1 +1,66 @@
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
+public class Driver
+{
+    private static Total myTotal;
+    private static int numReceipts;
+    private static ArrayList<Receipt> receipts;
+
+    public static void main(String[] args) {
+        myTotal = new Total();
+        JOptionPane.showMessageDialog(null, "Please fill in receipt files and click when done.");
+
+        receipts = new ArrayList<>();
+        fillReceiptList();
+        fillMyTotal();
+        printOutOption();
+    }
+
+    public static void fillReceiptList() {
+        numReceipts = Integer.parseInt(JOptionPane.showInputDialog("Enter number of receipts"));
+        for (int i = 0; i < numReceipts; i++) {
+            receipts.add(new Receipt());
+            fillReceipt(receipts.get(i));
+        }
+    }
+
+    public static void fillReceipt(Receipt r) {
+        Scanner infile = null;
+        boolean foundFile = false;
+
+        while (!foundFile) {
+            try {
+                String filename = JOptionPane.showInputDialog("Enter filename");
+                infile = new Scanner(new File(filename));
+                foundFile = true;
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Invalid number of receipts.");
+            }
+        }
+
+        Item item;
+        while (infile.nextLine() != null) {
+            item = new Item(infile.nextLine(), infile.nextDouble(), infile.nextLine(), infile.nextLine());
+            r.addItem(item);
+        }
+
+        r.updatePurchase();
+    }
+
+    public static void fillMyTotal() {
+        for (int i = 0; i < receipts.size(); i++) {
+            myTotal.updateNextReceipt(receipts.get(i));
+        }
+    }
+
+    public static void printOutOption() {
+        JOptionPane.showMessageDialog(null, "Click to continue the print out of your receipts.");
+
+        for (int i = 0; i < receipts.size(); i++) {
+            System.out.println(receipts.get(i).printReceipt());
+        }
+    }
+}
