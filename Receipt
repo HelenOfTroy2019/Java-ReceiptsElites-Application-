@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+
+public class Receipt extends Total
+{
+    private String myStore, myCashier, myDate, myPhoneNumber, myCode;
+    private ArrayList<Item> itemList;
+    private double myPurchase = 0.0;
+
+    public Receipt() {
+        myStore = "";
+        myCashier = "";
+        myDate = "";
+        myPhoneNumber = "";
+        myCode = "";
+    }
+
+    public Receipt(String store, String cashier, String date, String phoneNumber, String code) {
+        myStore = store;
+        myCashier = cashier;
+        myDate = date;
+        myPhoneNumber = phoneNumber;
+        myCode = code;
+
+        itemList = new ArrayList<Item>();
+    }
+
+    public void addItem(Item item) {
+        itemList.add(item);
+    }
+
+    public void updatePurchase() {
+        for (int i = 0; i < itemList.size(); i++) {
+            myPurchase += itemList.get(i).getCost();
+        }
+    }
+
+    public String printReceipt() {
+        String ans = "";
+        for (int i = 0; i < itemList.size(); i++) {
+            ans += itemList.get(i).printItem();
+            ans += "\n";
+        }
+
+        return ans;
+    }
+
+    public double getPurchase() {
+        return myPurchase;
+    }
+
+    public String getStore() {
+        return myStore;
+    }
+
+    public String getCashier() {
+        return myCashier;
+    }
+
+    public String getDate() {
+        return myDate;
+    }
+
+    public String getPhoneNumber() {
+        return myPhoneNumber;
+    }
+
+    public String getCode() {
+        return myCode;
+    }
+}
