@@ -1,0 +1,32 @@
+import java.util.ArrayList;
+
+public class Total
+{
+    private String myName;
+    private double totalSpent;
+    private ArrayList<Receipt> receiptList;
+
+    public Total() {
+        totalSpent = 0.0;
+        receiptList = new ArrayList<Receipt>();
+
+    }
+
+    public void updateTotal() {
+        for (int i=0; i<receiptList.size(); i++) {
+            totalSpent += receiptList.get(i).getPurchase();
+        }
+    }
+
+    public int getNumOfReceipts() {
+        return receiptList.size();
+    }
+
+    public void setName(String name) {
+        myName = name;
+    }
+
+    public void updateNextReceipt(Receipt r) {
+        receiptList.add(r);
+    }
+}
